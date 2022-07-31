@@ -104,7 +104,9 @@ func getCurrencyRateLock(parallelCurrency *ParallelCurrency, currency string) er
 
 func getCurrencyRatesWithWorker(queue chan string, parallelCurrency *ParallelCurrency, waitGroup *sync.WaitGroup) error {
 	for currency := range queue {
-		getCurrencyRateLock(parallelCurrency, currency)
+		if err := getCurrencyRateLock(parallelCurrency, currency); err != nil {
+			return err
+		}
 	}
 
 	waitGroup.Done()
