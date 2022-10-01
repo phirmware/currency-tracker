@@ -128,11 +128,6 @@ func main() {
 		setDefaultHeaders(w)
 		fmt.Fprintf(w, "Server up and running\n")
 	}).Methods("GET", "POST")
-	
-	r.HandleFunc("/live", func(w http.ResponseWriter, r *http.Request) {
-		setDefaultHeaders(w)
-		fmt.Fprintf(w, "Server alive and running\n")
-	}).Methods("GET", "POST")
 
 	r.HandleFunc("/currency/{currency}", func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
