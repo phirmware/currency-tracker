@@ -126,6 +126,7 @@ func main() {
 
 	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		setDefaultHeaders(w)
+		fmt.Fprintf(w, "Health check triggered.")
 		fmt.Fprintf(w, "Server up and running dev\n")
 	}).Methods("GET", "POST")
 
