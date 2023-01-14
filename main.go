@@ -133,6 +133,7 @@ func main() {
 	r.HandleFunc("/currency/{currency}", func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		currency := vars["currency"]
+		fmt.Println("Rates for ", currency)
 
 		result, err := getCurrencyRates(currency)
 		if err != nil {
@@ -141,7 +142,7 @@ func main() {
 			return
 		}
 		
-		fmt.Println("Rates for ", currency)
+		fmt.Println(result)
 
 		setDefaultHeaders(w)
 		w.WriteHeader(http.StatusOK)
