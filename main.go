@@ -13,7 +13,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const NumberOfWorkers = 4
+const NumberOfWorkers = 3
 
 type ParallelCurrency struct {
 	Result []CurrencyResult
@@ -126,13 +126,14 @@ func main() {
 
 	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		setDefaultHeaders(w)
-		fmt.Fprintf(w, "Health check triggered.")
-		fmt.Fprintf(w, "Server up and running dev\n")
+		fmt.Println("Health check handler called")
+		fmt.Fprintf(w, "Server up and running.")
 	}).Methods("GET", "POST")
 
 	r.HandleFunc("/currency/{currency}", func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		currency := vars["currency"]
+		fmt.Println("Rates for ", currency)
 
 		result, err := getCurrencyRates(currency)
 		if err != nil {
@@ -140,6 +141,8 @@ func main() {
 			returnErrorMessage(w, "Something went wrong", http.StatusInternalServerError)
 			return
 		}
+		
+		fmt.Println(result)
 
 		setDefaultHeaders(w)
 		w.WriteHeader(http.StatusOK)
