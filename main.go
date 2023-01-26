@@ -179,6 +179,8 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(result.Result)
 	}).Methods("GET")
+	
+	panic("Test rollback")
 
 	if err := server.ListenAndServe(); err != nil {
 		panic(err)
