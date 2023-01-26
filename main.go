@@ -114,6 +114,7 @@ func getCurrencyRatesWithWorker(queue chan string, parallelCurrency *ParallelCur
 }
 
 func main() {
+	panic("Test rollback")
 	r := mux.NewRouter()
 	handlers.AllowedOrigins([]string{"*"})
 
