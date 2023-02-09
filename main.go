@@ -114,7 +114,6 @@ func getCurrencyRatesWithWorker(queue chan string, parallelCurrency *ParallelCur
 }
 
 func main() {
-	panic("Test rollback")
 	r := mux.NewRouter()
 	handlers.AllowedOrigins([]string{"*"})
 
@@ -127,7 +126,7 @@ func main() {
 
 	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		setDefaultHeaders(w)
-		fmt.Println("Health check handler API called")
+		fmt.Println("Health check handler API called", r)
 		fmt.Fprintf(w, "Server up and running.")
 	}).Methods("GET", "POST")
 
@@ -180,8 +179,6 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(result.Result)
 	}).Methods("GET")
-	
-	panic("Test rollback")
 
 	if err := server.ListenAndServe(); err != nil {
 		panic(err)
