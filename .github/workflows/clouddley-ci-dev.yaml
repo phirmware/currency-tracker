@@ -8,7 +8,7 @@ name: Deploy to Amazon Ecs by Clouddley
             - dev
 env:
     AWS_REGION: us-west-2
-    ECR_REPOSITORY: clouddley-currency-tracker
+    ECR_REPOSITORY: clouddley-currency-tracker-dev
 jobs:
     deploy:
         name: Deploy
