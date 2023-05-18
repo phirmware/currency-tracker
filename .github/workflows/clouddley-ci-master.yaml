@@ -14,8 +14,8 @@ jobs:
         name: Deploy
         runs-on: ubuntu-latest
         outputs:
-            # image_uri: ${{ steps.build_image.outputs.image }}
-            image_uri: ${{ env.image }}
+            image_uri: ${{ steps.build_image.outputs.image }}
+            # image_uri: ${{ env.image }}
         environment: dev
         steps:
             - name: checkout
@@ -42,7 +42,7 @@ jobs:
                 echo "::add-mask::$BUILD_IMAGE"
                 image_encrypted=$(gpg --symmetric --batch --passphrase "$SECRET" --output - <(echo "$BUILD_IMAGE") | base64 -w0)
                 # echo "::set-output name=image::$image_encrypted"
-                echo "image=$image_encrypted" >> $GITHUB_OUTPUT
+                echo "image=$image_encrypted" >> "$GITHUB_OUTPUT"
     ping:
         name: Set Marker
         runs-on: ubuntu-latest
