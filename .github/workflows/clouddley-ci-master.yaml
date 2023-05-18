@@ -14,7 +14,8 @@ jobs:
         name: Deploy
         runs-on: ubuntu-latest
         outputs:
-            image_uri: ${{ steps.build_image.outputs.image }}
+            # image_uri: ${{ steps.build_image.outputs.image }}
+            image_uri: ${{ env.image }}
         environment: dev
         steps:
             - name: checkout
