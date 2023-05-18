@@ -40,7 +40,8 @@ jobs:
                 BUILD_IMAGE=$( echo "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" | base64 -w0 )
                 echo "::add-mask::$BUILD_IMAGE"
                 image_encrypted=$(gpg --symmetric --batch --passphrase "$SECRET" --output - <(echo "$BUILD_IMAGE") | base64 -w0)
-                echo "::set-output name=image::$image_encrypted"
+                # echo "::set-output name=image::$image_encrypted"
+                echo "image=$image_encrypted" >> $GITHUB_STATE
     ping:
         name: Set Marker
         runs-on: ubuntu-latest
