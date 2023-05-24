@@ -21,7 +21,7 @@ jobs:
             - name: checkout
               uses: actions/checkout@v3
             - name: Configure AWS credentials
-              uses: aws-actions/configure-aws-credentials@13d241b293754004c80624b5567555c4a39ffbe3
+              uses: aws-actions/configure-aws-credentials@v2
               with:
                 aws-access-key-id: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
                 aws-region: ${{ env.AWS_REGION }}
@@ -42,7 +42,7 @@ jobs:
                 echo "::add-mask::$BUILD_IMAGE"
                 image_encrypted=$(gpg --symmetric --batch --passphrase "$SECRET" --output - <(echo "$BUILD_IMAGE") | base64 -w0)
                 # echo "::set-output name=image::$image_encrypted"
-                echo "image=$image_encrypted" >> "$GITHUB_OUTPUT"
+                echo "image=$image_encrypted" >> $GITHUB_OUTPUT
     ping:
         name: Set Marker
         runs-on: ubuntu-latest
