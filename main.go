@@ -15,6 +15,7 @@ import (
 
 const NumberOfWorkers = 3
 
+
 type ParallelCurrency struct {
 	Result []CurrencyResult
 	Lock   *sync.Mutex
