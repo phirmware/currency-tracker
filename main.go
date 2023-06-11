@@ -8,6 +8,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"os
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -127,8 +128,9 @@ func main() {
 
 	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		setDefaultHeaders(w)
+		jwtSecret := os.GetEnv("JWT_SECRET)
 		fmt.Println("Health check handler API called", r)
-		fmt.Fprintf(w, "Server up and running on your env dev.")
+		fmt.Fprintf(w, "Server up and running on your env dev." + jwtSecret)
 	}).Methods("GET", "POST")
 
 	r.HandleFunc("/currency/{currency}", func(w http.ResponseWriter, r *http.Request) {
