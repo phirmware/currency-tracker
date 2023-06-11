@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 	"time"
-	"os
+	"os"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
