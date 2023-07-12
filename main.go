@@ -14,7 +14,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const NumberOfWorkers = 20
+const NumberOfWorkers = 40
 
 
 type ParallelCurrency struct {
