@@ -14,7 +14,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const NumberOfWorkers =
+const NumberOfWorkers = 5
 
 type ParallelCurrency struct {
 	Result []CurrencyResult
