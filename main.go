@@ -129,8 +129,10 @@ func main() {
 	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		setDefaultHeaders(w)
 		jwtSecret := os.Getenv("JWT_SECRET")
+		appenv := os.Getenv("APP_ENV")
+		port := os.Getenv("PORT")
 		fmt.Println("Health check handler API called", r)
-		fmt.Fprintf(w, "Server up and running on your env dev." + jwtSecret)
+		fmt.Fprintf(w, "Server up and running on your env." + appenv + "on port" + port + "with jwt secret" + jwtSecret)
 	}).Methods("GET", "POST")
 
 	r.HandleFunc("/currency/{currency}", func(w http.ResponseWriter, r *http.Request) {
