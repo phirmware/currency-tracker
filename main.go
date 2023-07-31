@@ -120,7 +120,7 @@ func main() {
 	handlers.AllowedOrigins([]string{"*"})
 
 	server := &http.Server{
-		Addr:         ":8080",
+		Addr:         ":3333",
 		Handler:      handlers.CORS()(r),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 5 * time.Second,
