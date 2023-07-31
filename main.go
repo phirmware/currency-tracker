@@ -155,7 +155,8 @@ func main() {
 		setDefaultHeaders(w)
 		fmt.Println("Health check triggered.")
 		env := os.Getenv("ENV")
-		fmt.Fprintf(w, "Server up and running %s\n", env)
+		port := os.Getenv("PORT")
+		fmt.Fprintf(w, "Server up and running %s and port %s\n", env, port)
 	}).Methods("GET", "POST")
 
 	r.HandleFunc("/currency/{currency}", func(w http.ResponseWriter, r *http.Request) {
