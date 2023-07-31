@@ -118,6 +118,7 @@ func getCurrencyRatesWithWorker(queue chan string, parallelCurrency *ParallelCur
 func main() {
 	r := mux.NewRouter()
 	handlers.AllowedOrigins([]string{"*"})
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
 
 	server := &http.Server{
 		Addr:         ":3333",
