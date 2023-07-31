@@ -1,11 +1,12 @@
 package main
 
 import (
-	"os"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -119,11 +120,35 @@ func main() {
 	handlers.AllowedOrigins([]string{"*"})
 
 	server := &http.Server{
-		Addr:         ":" + os.Getenv("PORT"),
+		Addr:         ":8080",
 		Handler:      handlers.CORS()(r),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 5 * time.Second,
 	}
+
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		type PageVariables struct {
+			Title   string
+			Content string
+		}
+
+		Pv := PageVariables{
+			Title:   "Welcome",
+			Content: "Welcome to our website!",
+		}
+
+		t, err := template.ParseFiles("home.html") // Parse template file
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		err = t.Execute(w, Pv) // merge data with template
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	})
 
 	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		setDefaultHeaders(w)
