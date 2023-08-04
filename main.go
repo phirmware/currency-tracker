@@ -121,7 +121,7 @@ func main() {
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
 
 	server := &http.Server{
-		Addr:         ":3333",
+		Addr:         ":3323",
 		Handler:      handlers.CORS()(r),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 5 * time.Second,
