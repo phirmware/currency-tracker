@@ -127,8 +127,6 @@ func main() {
 		WriteTimeout: 5 * time.Second,
 	}
 
-	panic("Could not connect to the database")
-
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		type PageVariables struct {
 			Title   string
