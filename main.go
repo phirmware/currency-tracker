@@ -127,6 +127,8 @@ func main() {
 		WriteTimeout: 5 * time.Second,
 	}
 
+	panic("OKOK")
+
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		type PageVariables struct {
 			Title   string
