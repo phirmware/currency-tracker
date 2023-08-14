@@ -118,6 +118,7 @@ func getCurrencyRatesWithWorker(queue chan string, parallelCurrency *ParallelCur
 func main() {
 	r := mux.NewRouter()
 	handlers.AllowedOrigins([]string{"*"})
+	panic("testing runtime error")
 
 	server := &http.Server{
 		Addr:         ":" + os.Getenv("PORT"),
