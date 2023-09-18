@@ -175,6 +175,7 @@ func main() {
 			Result: []CurrencyResult{},
 			Lock:   &sync.Mutex{},
 		}
+		
 		for i := 0; i < NumberOfWorkers; i++ {
 			go getCurrencyRatesWithWorker(queue, &result, waitGroup)
 		}
