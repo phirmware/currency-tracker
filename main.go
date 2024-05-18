@@ -132,8 +132,9 @@ func main() {
 		jwtSecret := os.Getenv("JWT_SECRET")
 		appenv := os.Getenv("APP_ENV")
 		port := os.Getenv("PORT")
+		otlp := os.Getenv("OTEL_EXPORTER_OTLP")
 		fmt.Println("Health check handler API called", r)
-		fmt.Fprintf(w, "Server up and running on your env." + appenv + "on port" + port + "with jwt secret" + jwtSecret)
+		fmt.Fprintf(w, "Server up and running on your env." + appenv + "\n on port" + port + "\n with jwt secret" + jwtSecret + "otlp: " + otlp)
 	}).Methods("GET", "POST")
 
 	r.HandleFunc("/currency/{currency}", func(w http.ResponseWriter, r *http.Request) {
